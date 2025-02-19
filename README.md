@@ -56,4 +56,11 @@ drwxr-xr-x  2 root root 4096 Feb 19 12:00 .
 drwxr-xr-x 10 root root 4096 Feb 19 10:00 ..
 -rw-r--r--  1 root root  123 Feb 19 12:00 example.txt
 
+
+🔥 Kesimpulan
+✅ Systemd lebih stealth/senyap dibanding crontab
+✅ Bisa berjalan otomatis tanpa perlu cron
+✅ Nama service bisa disamarkan jadi bash
+✅ Restart otomatis jika mati
+
 ```
