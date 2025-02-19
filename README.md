@@ -11,7 +11,7 @@
     <img src="https://img.shields.io/badge/php-5-green.svg">
 </p>
 
-1. startup command `node` value
+1. startup command `bash` value
 ```
 bash install.sh
 
