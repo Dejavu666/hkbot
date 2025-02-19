@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Konfigurasi Telegram
-BOT_TOKEN="7703354895:AAGvQSrM3JKKlIPd_v_yFxlCQYMO96DE5lg"
-CHAT_ID="-1002470378353"
+BOT_TOKEN="7700000000:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+CHAT_ID="-100000000000"
 TARGET_ID=$(hostname)  # Gunakan hostname sebagai ID unik
 
 # Fungsi untuk mengirim hasil ke Telegram
