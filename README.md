@@ -20,7 +20,19 @@ bash install.sh
 
 
 script ini berjalan untuk multi target itu kenapa di /nc_telegram.sh
-ada bagian TARGET_ID=$(hostname)  # Gunakan hostname sebagai ID unik
+#!/bin/bash
+
+# Konfigurasi Telegram
+BOT_TOKEN="ganti"
+CHAT_ID="-ganti"
+
+# Daftar server yang bisa dieksekusi
+TARGET_LIST=("kancil1")  # Tambahkan server lain di sini
+TARGET_ID="kancil1"  # Gunakan hostname sebagai ID unik
+
+
+ganti bot token dan chat_id serta tambahkan list tahet jika ada beberapa target .
+=====================================================================================
 
 tujuan nya untuk ketika menjalankkan di telegram comand nya seperti ini 
 contoh 
