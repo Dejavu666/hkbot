@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Konfigurasi Telegram
-BOT_TOKEN="ganti"
-CHAT_ID="-ganti"
+BOT_TOKEN="000000000000000000000000000000000000"
+CHAT_ID="-000000000"
 
 # Daftar server yang bisa dieksekusi
-TARGET_LIST=("kancil1")  # Tambahkan server lain di sini
-TARGET_ID="kancil1"  # Gunakan hostname sebagai ID unik
+TARGET_LIST=("wolf1")  # Tambahkan server lain di sini
+TARGET_ID="wolf1"  # Gunakan hostname sebagai ID unik
 
 # Fungsi escape karakter agar aman di HTML
 escape_html() {
@@ -44,7 +44,7 @@ get_server_list() {
     for target in "${!TARGET_LIST[@]}"; do
         ip="${TARGET_LIST[$target]}"
         hostname=$(ssh -o StrictHostKeyChecking=no root@$ip "hostname" 2>/dev/null || echo "Unknown")
-        result+="$target → $hostname ($ip)\n"
+        result+="$target ? $hostname ($ip)\n"
     done
 
     echo -e "$result"
